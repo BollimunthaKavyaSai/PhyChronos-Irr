@@ -1,0 +1,16 @@
+S1 f0: train MAE 6.24 alpha=0.036 r=1.000 beta=1.000 c=0.088 d=0.377 kappa=0.000
+S1 f1: train MAE 6.17 alpha=0.032 r=1.000 beta=1.000 c=0.099 d=0.350 kappa=0.000
+S1 f2: train MAE 6.32 alpha=0.027 r=1.000 beta=1.000 c=0.125 d=0.345 kappa=0.000
+S1 f3: train MAE 6.60 alpha=0.031 r=1.000 beta=1.000 c=0.106 d=0.398 kappa=0.000
+S2 f0: train MAE 6.68 alpha=0.019 r=1.000 beta=1.000 c=0.111 d=0.258 kappa=0.000
+S2 f1: train MAE 6.46 alpha=0.015 r=1.000 beta=1.000 c=0.130 d=0.231 kappa=0.000
+S2 f2: train MAE 6.17 alpha=0.013 r=1.000 beta=1.000 c=0.243 d=0.204 kappa=0.000
+S2 f3: train MAE 5.81 alpha=0.016 r=1.000 beta=1.000 c=0.391 d=0.178 kappa=0.000
+S4 f0: train MAE 5.32 alpha=0.019 r=1.000 beta=1.000 c=0.044 d=0.025 kappa=0.000
+S4 f1: train MAE 5.19 alpha=0.022 r=1.000 beta=1.000 c=0.059 d=0.025 kappa=0.000
+S4 f2: train MAE 5.21 alpha=0.026 r=1.000 beta=1.000 c=0.112 d=0.027 kappa=0.000
+S4 f3: train MAE 5.06 alpha=0.028 r=1.000 beta=1.000 c=0.113 d=0.027 kappa=0.000
+S5 f0: train MAE 4.64 alpha=0.050 r=1.000 beta=1.000 c=0.111 d=0.050 kappa=0.000
+S5 f1: train MAE 4.56 alpha=0.050 r=1.000 beta=1.000 c=0.101 d=0.050 kappa=0.000
+S5 f2: train MAE 4.62 alpha=0.079 r=1.000 beta=1.000 c=0.105 d=0.133 kappa=0.000
+S5 f3: train MAE 4.83 alpha=0.088 r=1.000 beta=1.000 c=0.108 d=0.155 kappa=0.000

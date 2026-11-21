@@ -1,0 +1,5 @@
+sector,plant,controller,noise,kappa,water_L,stress_h,danger_h,excess_h,optimal_frac,drainage,hours,n_decisions,mean_dose_min
+1,A,Physics,False,-3.0,6237.0,0,0,0,1.0,19.544363104163658,1031,43,131.86046511627907
+2,A,Physics,False,-3.0,20328.0,0,0,0,1.0,85.92648884851181,1060,44,420.0
+4,A,Physics,False,-3.0,14289.0,16,0,0,0.9881305637982196,25.29727098822536,1348,56,231.96428571428572
+5,A,Physics,False,-3.0,3612.0,38,0,0,0.9716629381058911,524.7073323061878,1341,56,161.25

@@ -1,0 +1,15 @@
+  PatchTST fold 0: train 5630 val 997 best val 0.0719 epochs 4
+  PatchTST fold 1: train 6824 val 1206 best val 0.0625 epochs 4
+  PatchTST fold 2: train 8051 val 1423 best val 0.0581 epochs 3
+  PatchTST fold 3: train 9350 val 1651 best val 0.0539 epochs 4
+PatchTST: done in 4078s
+  iTransformer fold 0: train 5630 val 997 best val 0.0698 epochs 6
+  iTransformer fold 1: train 6824 val 1206 best val 0.0709 epochs 3
+  iTransformer fold 2: train 8051 val 1423 best val 0.0639 epochs 5
+  iTransformer fold 3: train 9350 val 1651 best val 0.0528 epochs 6
+iTransformer: done in 1577s
+  TimeXer fold 0: train 5630 val 997 best val 0.0682 epochs 6
+  TimeXer fold 1: train 6824 val 1206 best val 0.0616 epochs 4
+  TimeXer fold 2: train 8051 val 1423 best val 0.0583 epochs 7
+  TimeXer fold 3: train 9350 val 1651 best val 0.0534 epochs 8
+TimeXer: done in 1199s

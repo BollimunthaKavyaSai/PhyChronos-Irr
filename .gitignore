@@ -1,0 +1,14 @@
+# Raw public datasets (too large for GitHub; download links are in README.md)
+data/raw/
+
+# Python cache and virtual environments
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Editor / OS files
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini

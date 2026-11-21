@@ -1,0 +1,31 @@
+S1 f0 done (train 528)
+S1 f1 done (train 732)
+S1 f2 done (train 920)
+S1 f3 done (train 1110)
+S2 f0 done (train 1042)
+S2 f1 done (train 1240)
+S2 f2 done (train 1380)
+S2 f3 done (train 1570)
+S4 f0 done (train 936)
+S4 f1 done (train 1234)
+S4 f2 done (train 1480)
+S4 f3 done (train 1780)
+S5 f0 done (train 862)
+S5 f1 done (train 966)
+S5 f2 done (train 1240)
+S5 f3 done (train 1536)
+                     cov                                width                               
+scenario           clean  drift dropout  spike  stuck   clean   drift dropout   spike  stuck
+model                                                                                       
+Abl-noPhysics-FA   0.783  0.540   0.676  0.751  0.272  11.173  11.817  11.479  11.902  6.549
+Chronos-2+cov      0.741  0.481   0.523  0.733  0.116   9.161  10.093   7.223  11.321  1.869
+PhyChronos-Irr-FA  0.762  0.505   0.663  0.691  0.282  11.452  11.284  11.837  10.447  6.376
+scenario                         clean  dropout  stuck  drift  spike  deg_dropout_%  deg_stuck_%  deg_drift_%  deg_spike_%
+model                                                                                                                     
+Abl-noPhysics-FA                  3.28     4.34   5.53   5.22   4.12          32.43        68.93        59.50        25.74
+Chronos-2+cov                     3.25     4.34   5.51   5.33   4.15          33.56        69.42        63.91        27.66
+GH-DualStore                      5.82     5.58   5.37   9.22  18.31          -4.14        -7.68        58.35       214.57
+Persistence                       5.86     5.32   5.56   9.53  22.80          -9.26        -5.11        62.65       289.04
+PhyChronos-Irr                    3.32     4.39   5.41   5.74   5.69          32.23        63.00        73.00        71.55
+PhyChronos-Irr (no fault feat.)   3.30     4.39   5.40   5.67   4.89          33.20        63.84        71.89        48.42
+PhyChronos-Irr-FA                 3.37     4.39   5.40   5.45   4.03          30.23        60.08        61.80        19.60

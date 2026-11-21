@@ -1,0 +1,22 @@
+chronos-forecasting==2.3.2
+einops==0.8.2
+gluonts==0.17.0
+huggingface_hub==1.5.0
+lxml==6.1.3
+matplotlib==3.10.8
+numpy==2.4.2
+openpyxl==3.1.5
+pandas==2.3.3
+pillow==12.1.1
+pyarrow==23.0.1
+python-docx==1.2.0
+reformer-pytorch==1.4.4
+requests==2.32.5
+scikit-learn==1.8.0
+scipy==1.17.1
+tirex-ts==1.4.2
+torch==2.14.0
+transformers==5.2.0
+uni2ts==2.0.0
+xgboost==3.2.0
+timesfm @ git+https://github.com/google-research/timesfm.git@918df02c9d366b2145bc5876135fa2131d3ed2a6

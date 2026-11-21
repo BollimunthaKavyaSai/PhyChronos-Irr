@@ -1,0 +1,90 @@
+Traceback (most recent call last):
+  File "D:\research paper\november 17\src\e2_deep.py", line 150, in <module>
+    P.save_preds(n, run_model(n))
+                    ^^^^^^^^^^^^
+  File "D:\research paper\november 17\src\e2_deep.py", line 109, in run_model
+    model = build(name)
+            ^^^^^^^^^^^
+  File "D:\research paper\november 17\src\e2_deep.py", line 80, in build
+    return importlib.import_module(f"models.{name}").Model(cfg(name))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Dell\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\research paper\november 17\external\Time-Series-Library\models\PatchTST.py", line 4, in <module>
+    from layers.SelfAttention_Family import FullAttention, AttentionLayer
+  File "D:\research paper\november 17\external\Time-Series-Library\layers\SelfAttention_Family.py", line 6, in <module>
+    from reformer_pytorch import LSHSelfAttention
+ModuleNotFoundError: No module named 'reformer_pytorch'
+PatchTST: FAILED ModuleNotFoundError("No module named 'reformer_pytorch'")
+Traceback (most recent call last):
+  File "D:\research paper\november 17\src\e2_deep.py", line 150, in <module>
+    P.save_preds(n, run_model(n))
+                    ^^^^^^^^^^^^
+  File "D:\research paper\november 17\src\e2_deep.py", line 109, in run_model
+    model = build(name)
+            ^^^^^^^^^^^
+  File "D:\research paper\november 17\src\e2_deep.py", line 80, in build
+    return importlib.import_module(f"models.{name}").Model(cfg(name))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Dell\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\research paper\november 17\external\Time-Series-Library\models\iTransformer.py", line 5, in <module>
+    from layers.SelfAttention_Family import FullAttention, AttentionLayer
+  File "D:\research paper\november 17\external\Time-Series-Library\layers\SelfAttention_Family.py", line 6, in <module>
+    from reformer_pytorch import LSHSelfAttention
+ModuleNotFoundError: No module named 'reformer_pytorch'
+iTransformer: FAILED ModuleNotFoundError("No module named 'reformer_pytorch'")
+Traceback (most recent call last):
+  File "D:\research paper\november 17\src\e2_deep.py", line 150, in <module>
+    P.save_preds(n, run_model(n))
+                    ^^^^^^^^^^^^
+  File "D:\research paper\november 17\src\e2_deep.py", line 109, in run_model
+    model = build(name)
+            ^^^^^^^^^^^
+  File "D:\research paper\november 17\src\e2_deep.py", line 80, in build
+    return importlib.import_module(f"models.{name}").Model(cfg(name))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Dell\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\research paper\november 17\external\Time-Series-Library\models\TimeXer.py", line 4, in <module>
+    from layers.SelfAttention_Family import FullAttention, AttentionLayer
+  File "D:\research paper\november 17\external\Time-Series-Library\layers\SelfAttention_Family.py", line 6, in <module>
+    from reformer_pytorch import LSHSelfAttention
+ModuleNotFoundError: No module named 'reformer_pytorch'
+TimeXer: FAILED ModuleNotFoundError("No module named 'reformer_pytorch'")
+  TiDE fold 0: train 5630 val 997 best val 0.0755 epochs 6
+  TiDE fold 1: train 6824 val 1206 best val 0.0678 epochs 8
+  TiDE fold 2: train 8051 val 1423 best val 0.0624 epochs 7
+  TiDE fold 3: train 9350 val 1651 best val 0.0542 epochs 12
+TiDE: done in 7918s
+  TSMixer fold 0: train 5630 val 997 best val 0.0921 epochs 4
+  TSMixer fold 1: train 6824 val 1206 best val 0.0676 epochs 6
+  TSMixer fold 2: train 8051 val 1423 best val 0.0715 epochs 6
+  TSMixer fold 3: train 9350 val 1651 best val 0.0699 epochs 3
+TSMixer: done in 256s
+  LSTM fold 0: train 5630 val 997 best val 0.0809 epochs 5
+  LSTM fold 1: train 6824 val 1206 best val 0.0725 epochs 3
+  LSTM fold 2: train 8051 val 1423 best val 0.0882 epochs 3
+  LSTM fold 3: train 9350 val 1651 best val 0.0850 epochs 3
+LSTM: done in 775s

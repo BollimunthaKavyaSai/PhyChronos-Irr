@@ -1,0 +1,16 @@
+data,protocol,model,MAE,RMSE,R2,F1_macro,MAE_skill_vs_persistence
+published,Rolling+embargo,Persistence,2.126,3.608,0.881,0.541,0.0
+published,Rolling+embargo,XGBoost,9.335,14.208,-0.024,0.501,-2.862
+published,Rolling+embargo,XGBoost-delta,8.805,13.06,-0.755,0.37,-3.754
+published,SGKF-3day,Persistence,3.118,5.477,0.857,0.451,0.0
+published,SGKF-3day,XGBoost,1.354,2.714,0.962,0.835,0.572
+published,SGKF-3day,XGBoost-delta,1.284,2.561,0.966,0.788,0.588
+rebuilt,Rolling+embargo,Persistence,2.755,4.194,0.831,0.528,0.0
+rebuilt,Rolling+embargo,XGB -calendar (delta),5.36,7.751,0.433,0.555,-1.965
+rebuilt,Rolling+embargo,XGB -calendar -EC/pH (delta),4.975,7.308,0.535,0.544,-1.569
+rebuilt,Rolling+embargo,XGB -calendar -future water (delta),5.809,8.457,0.312,0.537,-2.348
+rebuilt,Rolling+embargo,XGBoost,6.866,11.337,0.248,0.468,-1.809
+rebuilt,Rolling+embargo,XGBoost-delta,5.251,7.52,0.485,0.541,-1.872
+rebuilt,SGKF-3day,Persistence,4.017,5.756,0.77,0.519,0.0
+rebuilt,SGKF-3day,XGBoost,1.985,3.229,0.92,0.822,0.508
+rebuilt,SGKF-3day,XGBoost-delta,1.922,3.077,0.926,0.767,0.523
