@@ -135,8 +135,15 @@ def dose_diag(head, z, h, keep, cdf, bucket, name):
     k, x, c, p, _ = HY.build_xy(z, h, keep, cdf, bucket, True)
     cfs = cf_set(z, h, k, bucket, x)
     with torch.no_grad():
-        ms = [head(xk, c, pk)[0][..., 4].numpy() for xk, pk in cfs]
+        qs_all = [head(xk, c, pk)[0].numpy() for xk, pk in cfs]
+        ms = [q[..., 4] for q in qs_all]
         es = [(pk[..., 0] - pk[..., 1]).numpy() for _, pk in cfs]
+    t_ = C.THRESH[z]
+    post = slice(DOSE_H - 1, None)
+    resp_err = float(np.mean([np.abs((ms[i] - ms[0])[:, post] - es[i][:, post]).mean() for i in range(1, len(DOSES))]))
+    band_viol = float(np.mean([(np.abs((ms[i] - ms[0])[:, post] - es[i][:, post]) > DELTA * np.abs(es[i][:, post]) + EPS).mean()
+                               for i in range(1, len(DOSES))]))
+    sat_viol = float(np.mean([((q > t_["SP"]) | (q < t_["PWP"] - 10)).mean() for q in qs_all]))
     rows = []
     r3 = np.stack([ms[i][:, DOSE_H] - ms[0][:, DOSE_H] for i in range(len(DOSES))], 1)
     mono = float((np.diff(r3, axis=1) >= -0.05).all(1).mean())
@@ -144,14 +151,22 @@ def dose_diag(head, z, h, keep, cdf, bucket, name):
     for i, d in enumerate(DOSES):
         rows.append(dict(model=name, sector=z, dose=d, resp_3h=float(r3[:, i].mean()),
                          peak=float((ms[i] - ms[0]).max(1).mean()), phys_peak=float(es[i].max(1).mean()),
-                         monotone_frac=mono, pre_dose_leak=pre))
+                         monotone_frac=mono, pre_dose_leak=pre, resp_err=resp_err, band_viol=band_viol, sat_viol=sat_viol))
     return rows
 
 
 def main():
-    variant = sys.argv[1] if len(sys.argv) > 1 else "full"      # full | nocf
-    name = "RACER-Irr" if variant == "full" else "RACER-Irr (no CF loss)"
-    use_cf = variant == "full"
+    variant = sys.argv[1] if len(sys.argv) > 1 else "full"      # full | nocf | nomono | noband | nocaus | nosat | nofa
+    names = {"full": "RACER-Irr (rerun)", "nocf": "RACER-Irr (no CF loss)", "nomono": "RACER-Irr (no monotonicity)",
+             "noband": "RACER-Irr (no physics band)", "nocaus": "RACER-Irr (no causality)", "nosat": "RACER-Irr (no saturation)",
+             "nofa": "RACER-Irr (no fault augmentation)"}
+    name = names[variant]
+    use_cf = variant != "nocf"
+    fault_aug = variant != "nofa"
+    for key, v in (("nomono", "mono"), ("noband", "band"), ("nocaus", "caus"), ("nosat", "sat")):
+        if variant == key:
+            LAM[v] = 0.0
+    torch.set_num_threads(2)
     OUT.mkdir(parents=True, exist_ok=True)
     cdf = HY.chronos_all()
     aug = build_cache()
@@ -164,7 +179,7 @@ def main():
         lim = f["train_end"] - pd.Timedelta(hours=H)
         avail = set(cdf.loc[cdf.sector == z, "origin"])
         tr = [t for t in HY.season_origins(z, h0) if t <= lim and t in avail]
-        X, Cq, Pp, Y, CF = assemble(z, h0, tr, cdf, aug, bucket, lim)
+        X, Cq, Pp, Y, CF = assemble(z, h0, tr, cdf, aug, bucket, lim, fault_aug)
         head = train_racer(X, Cq, Pp, Y, CF, z, use_cf)
         te = [t for t in orig if t in avail]
         k, x, c, p, _ = HY.build_xy(z, h0, te, cdf, bucket, True)

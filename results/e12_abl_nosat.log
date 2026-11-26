@@ -1,0 +1,28 @@
+S1 f0 done (train 528)
+S1 f1 done (train 732)
+S1 f2 done (train 920)
+S1 f3 done (train 1110)
+S2 f0 done (train 1042)
+S2 f1 done (train 1240)
+S2 f2 done (train 1380)
+S2 f3 done (train 1570)
+S4 f0 done (train 936)
+S4 f1 done (train 1234)
+S4 f2 done (train 1480)
+S4 f3 done (train 1780)
+S5 f0 done (train 862)
+S5 f1 done (train 966)
+S5 f2 done (train 1240)
+S5 f3 done (train 1536)
+dose    0     30    60    120   240
+sector                             
+1       0.0  0.25  0.48  0.89  1.71
+2       0.0  0.32  0.68  1.23  2.02
+4       0.0  0.15  0.32  0.61  1.12
+5       0.0  2.36  4.98  7.22  8.89
+        monotone_frac  pre_dose_leak
+sector                              
+1                 1.0            0.0
+2                 1.0            0.0
+4                 1.0            0.0
+5                 1.0            0.0

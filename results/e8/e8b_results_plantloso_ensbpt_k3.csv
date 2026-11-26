@@ -1,0 +1,5 @@
+sector,plant,controller,noise,kappa,perturb,water_L,stress_h,danger_h,excess_h,optimal_frac,drainage,hours,n_decisions,mean_dose_min
+1,A,Ensemble-BPT,False,3.0,,4290.0,0,0,0,1.0,36.1594674974327,1031,43,90.69767441860465
+2,A,Ensemble-BPT,False,3.0,,4026.0,0,0,0,1.0,22.769933472139098,1060,44,83.18181818181819
+4,A,Ensemble-BPT,False,3.0,,21582.0,33,0,0,0.9755192878338279,60.335285343035366,1348,56,350.35714285714283
+5,A,Ensemble-BPT,False,3.0,,10992.0,239,0,0,0.8217747949291574,39.3162380313929,1341,56,490.7142857142857

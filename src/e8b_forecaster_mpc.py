@@ -67,6 +67,45 @@ def chronos_batch(hs, t, cands):
                      for k in range(len(cands))]).astype(np.float32)
 
 
+_ens = {}
+
+
+def ens_members():
+    if not _ens:
+        import timesfm
+        from tirex import load_model
+        from uni2ts.model.moirai2 import Moirai2Forecast, Moirai2Module
+        tf = timesfm.TimesFM_2p5_200M_torch.from_pretrained("google/timesfm-2.5-200m-pytorch")
+        tf.compile(timesfm.ForecastConfig(max_context=CTX, max_horizon=H * 2, normalize_inputs=True,
+                                          use_continuous_quantile_head=True, fix_quantile_crossing=True))
+        _ens["timesfm"] = tf
+        _ens["tirex"] = load_model("NX-AI/TiRex", device="cpu", backend="torch")
+        _ens["moirai"] = Moirai2Forecast(module=Moirai2Module.from_pretrained("Salesforce/moirai-2.0-R-small"),
+                                         prediction_length=H, context_length=CTX, target_dim=1,
+                                         feat_dynamic_real_dim=0, past_feat_dynamic_real_dim=0)
+    return _ens
+
+
+def chronos_uni(hs, t):
+    ctx = hs.loc[t - pd.Timedelta(hours=CTX - 1): t]
+    c = pd.DataFrame({"item_id": "0", "timestamp": ctx.index, "target": ctx["sm_f"].values})
+    out = pipe().predict_df(c, prediction_length=H, quantile_levels=P.QUANTILES, validate_inputs=False)
+    return np.sort(out.sort_values("timestamp")[[str(x) for x in P.QUANTILES]].values, 1).astype(np.float32)
+
+
+def ensemble_q(hs, t, cands):
+    """Equal-weight ensemble of the five zero-shot TSFMs (as in E13): Chronos-2, Chronos-2+cov, TiRex, Moirai-2.0, TimesFM-2.5."""
+    m = ens_members()
+    x = hs.loc[t - pd.Timedelta(hours=CTX - 1): t, "sm_f"].values[-CTX:].astype(np.float32)
+    qs = [chronos_uni(hs, t), chronos_batch(hs, t, cands[:1])[0]]
+    q, _ = m["tirex"].forecast(context=torch.tensor(x[None]), prediction_length=H)
+    qs.append(np.sort(np.asarray(q)[0], 1))
+    qs.append(np.sort(np.asarray(m["moirai"].predict(x[None]))[0].T, 1))
+    _, qt = m["timesfm"].forecast(horizon=H, inputs=[x])
+    qs.append(np.sort(qt[0, :H, 1:10], 1))
+    return np.mean(qs, 0).astype(np.float32)
+
+
 def phys_margin(z):
     d = pd.read_csv(P.PRED_DIR / "GH-DualStore(physics).csv.gz", parse_dates=["origin"])
     d = d[(d.sector == z) & (d.fold == 0)].copy()
@@ -108,6 +147,12 @@ def lower_bounds(kind, z, hs, t, cands, ctx):
                 q, _ = ctx["racer"](x, c, p)
             lo.append(q[0, :, 0].numpy()); med.append(q[0, :, 4].numpy())
         return np.array(lo), np.array(med)
+    if kind == "Ensemble-BPT":
+        cq = ensemble_q(hs, t, cands)
+        u_beh = behaviour_policy(z, hs, t, ctx)
+        _, med_p = lower_bounds("Physics", z, hs, t, cands + [u_beh], ctx)
+        shift = med_p[:-1] - med_p[-1:]
+        return cq[None, :, 0] + shift, cq[None, :, 4] + shift
     if kind == "Chronos-BPT":
         # Behaviour-Policy Transport: the FM forecast is read as the outcome under the logged (behaviour)
         # policy; physics transports it to candidate action u:  q(u) = q_FM + p(u) - p(u_beh).
@@ -224,7 +269,7 @@ def run(z, plant_kind, ctrl, h, plant_model, ctx):
         log.append(dict(theta=th, liters=liters))
         th = th_next
     L = pd.DataFrame(log)
-    return dict(sector=z, plant=plant_kind, controller=ctrl, noise=NOISE, kappa=KAPPA, water_L=L.liters.sum(),
+    return dict(sector=z, plant=plant_kind, controller=ctrl, noise=NOISE, kappa=KAPPA, perturb=PERTURB, water_L=L.liters.sum(),
                 stress_h=int((L.theta < t_["MADP"]).sum()), danger_h=int((L.theta < t_["PWP"]).sum()),
                 excess_h=int((L.theta > t_["FC"]).sum()),
                 optimal_frac=float(((L.theta >= t_["MADP"]) & (L.theta < t_["FC"])).mean()),
@@ -233,6 +278,7 @@ def run(z, plant_kind, ctrl, h, plant_model, ctx):
 
 
 PLANT_LOSO = "--plant-loso" in sys.argv
+PERTURB = sys.argv[sys.argv.index("--perturb") + 1] if "--perturb" in sys.argv else ""
 LOSO_FITS = {}
 
 
@@ -254,6 +300,18 @@ def main():
         fl = P.folds(z, h)
         tr_end = fl[1]["train_end"]
         bucket = HY.load_bucket(z, 1)
+        if PERTURB:
+            # physics-model error for BPT: scale (k*f) or set (k=v) one fold-1 parameter, clipped to its bounds
+            prm = PH.params_dict(bucket)
+            for item in PERTURB.split(","):
+                if "*" in item:
+                    k, f = item.split("*"); prm[k] = prm[k] * float(f)
+                else:
+                    k, v = item.split("="); prm[k] = float(v)
+                lo, hi = PH.BOUNDS[k]
+                prm[k] = float(min(max(prm[k], lo + 1e-3 * (hi - lo)), hi - 1e-3 * (hi - lo)))
+            print("perturbed physics", z, {k: round(v, 3) for k, v in prm.items()}, flush=True)
+            bucket = PH.Bucket(z, init=prm)
         ctx = dict(bucket=bucket, margin=phys_margin(z))
         if any(c in CTRLS for c in ("PhyChronos-Irr", "PhyChronos-Delta")):
             ctx["head"] = train_fold1_head(z, h, cdf, bucket, tr_end)

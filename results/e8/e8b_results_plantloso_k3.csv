@@ -1,0 +1,5 @@
+sector,plant,controller,noise,kappa,perturb,water_L,stress_h,danger_h,excess_h,optimal_frac,drainage,hours,n_decisions,mean_dose_min
+1,A,Chronos-BPT,False,3.0,,4356.0,0,0,0,1.0,36.17220815219809,1031,43,92.09302325581395
+2,A,Chronos-BPT,False,3.0,,4224.0,0,0,0,1.0,23.194515922890293,1060,44,87.27272727272727
+4,A,Chronos-BPT,False,3.0,,22110.0,33,0,0,0.9755192878338279,60.314010844470424,1348,56,358.92857142857144
+5,A,Chronos-BPT,False,3.0,,11088.0,239,0,0,0.8217747949291574,39.304652053529054,1341,56,495.0

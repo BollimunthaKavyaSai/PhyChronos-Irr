@@ -34,13 +34,13 @@ box(2, 60, 30, 9, "Chronos-2 (+covariates)", "frozen, zero-shot, 9 quantiles", "
 box(35, 60, 30, 9, "Reliability features", "7 sensor-fault signals", "data")
 box(68, 60, 30, 9, "Dual-store physics (C2)", "paths p(u), p(0), p(π_b)", "phys")
 arrow(17, 60, 30, 53); arrow(50, 60, 50, 53); arrow(83, 60, 70, 53)
-box(14, 41, 72, 11, "Fusion head: PhyChronos-Irr (C3) / RACER-Irr (C6)",
+box(14, 41, 72, 11, "Fusion head: PhyChronos-Irr (C2) / RACER-Irr (C4)",
     "m = w(c_med + g·[p(u)−p(0)]) + (1−w)·p(u);  RACER: counterfactual doses,\nmonotonicity, causality, physical band, fault augmentation", "new")
-box(2, 26, 46, 11, "Behaviour-Policy Transport (C5)", "training-free:  q(u) = q_FM − p(π_b) + p(u)", "new")
+box(2, 26, 46, 11, "Behaviour-Policy Transport (C4)", "training-free:  q(u) = q_FM − p(π_b) + p(u)", "new")
 box(52, 26, 46, 11, "Conformal calibration", "online ACI quantile tracking, 80 % intervals", "fm")
 arrow(40, 41, 25, 37.5); arrow(60, 41, 75, 37.5)
 ax.annotate("", xy=(25, 37.5), xytext=(17, 60), arrowprops=dict(arrowstyle="-|>", color="#6b6a64", lw=0.9, ls="--", connectionstyle="arc3,rad=0.25"))
-box(14, 11, 72, 10, "Chance-constrained planner (C4)", "daily dose: least water s.t. P(θ ≥ MADP) ≥ 0.9 (+ risk margin κ)", "dec")
+box(14, 11, 72, 10, "Chance-constrained planner (C3)", "daily dose: least water s.t. P(θ ≥ MADP) ≥ 0.9 (+ risk margin κ)", "dec")
 arrow(25, 26, 40, 21.5); arrow(75, 26, 60, 21.5)
 box(22, 0.5, 56, 7, "Greenhouse sector (simulated plant)", "irrigation applied; new readings", "data")
 arrow(50, 11, 50, 8)

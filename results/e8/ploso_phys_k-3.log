@@ -1,0 +1,11 @@
+plant fit 1 {'alpha': 0.032, 'r': 0.673, 'beta': 0.811, 'c': 0.272, 'd': 0.482, 'kappa': 0.519}
+plant fit 2 {'alpha': 0.02, 'r': 0.736, 'beta': 0.623, 'c': 0.442, 'd': 0.486, 'kappa': 0.266}
+plant fit 4 {'alpha': 0.037, 'r': 0.684, 'beta': 0.745, 'c': 0.191, 'd': 0.021, 'kappa': 0.289}
+plant fit 5 {'alpha': 0.545, 'r': 0.583, 'beta': 0.168, 'c': 0.217, 'd': 0.49, 'kappa': 0.454}
+{'sector': 1, 'plant': 'A', 'controller': 'Physics', 'noise': False, 'kappa': -3.0, 'perturb': '', 'water_L': np.float64(5544.0), 'stress_h': 0, 'danger_h': 0, 'excess_h': 0, 'optimal_frac': 1.0, 'drainage': 39.86, 'hours': 1031, 'n_decisions': 43, 'mean_dose_min': 117.21}
+{'sector': 2, 'plant': 'A', 'controller': 'Physics', 'noise': False, 'kappa': -3.0, 'perturb': '', 'water_L': np.float64(5181.0), 'stress_h': 0, 'danger_h': 0, 'excess_h': 0, 'optimal_frac': 1.0, 'drainage': 24.64, 'hours': 1060, 'n_decisions': 44, 'mean_dose_min': 107.05}
+{'sector': 4, 'plant': 'A', 'controller': 'Physics', 'noise': False, 'kappa': -3.0, 'perturb': '', 'water_L': np.float64(25410.0), 'stress_h': 33, 'danger_h': 0, 'excess_h': 0, 'optimal_frac': 0.98, 'drainage': 61.36, 'hours': 1348, 'n_decisions': 56, 'mean_dose_min': 412.5}
+{'sector': 5, 'plant': 'A', 'controller': 'Physics', 'noise': False, 'kappa': -3.0, 'perturb': '', 'water_L': np.float64(11448.0), 'stress_h': 258, 'danger_h': 0, 'excess_h': 0, 'optimal_frac': 0.81, 'drainage': 39.91, 'hours': 1341, 'n_decisions': 56, 'mean_dose_min': 511.07}
+                  water_L  stress_h  danger_h  optimal_frac
+plant controller                                           
+A     Physics     47583.0       291         0          0.95

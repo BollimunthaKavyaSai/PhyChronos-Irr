@@ -41,20 +41,22 @@ After the first download, set `HF_HUB_OFFLINE=1` to run offline. Run every scrip
 | E1: protocol audit / EDML reproduction | `e1_reproduce.py [--season]` | `results/e1/` |
 | E2: forecasting benchmark | `e2_panel.py` (protocol), `e2_baselines.py`, `e2_foundation.py <chronos2\|chronos2cov\|timesfm\|moirai2\|tirex>`, `e2_deep.py <models>`, `e2_eval.py` | `results/e2/` |
 | C2/E3: dual-store physics model | `physics.py`, `e3_physics.py` | `results/e3/params_*.csv` |
-| C3: PhyChronos-Irr hybrid (+ E9 ablations) | `e3_hybrid.py [--no-physics] [--no-fault] [--single]` | `results/e2/preds/` |
+| C2: PhyChronos-Irr hybrid (+ E9 ablations) | `e3_hybrid.py [--no-physics] [--no-fault] [--single]` | `results/e2/preds/` |
 | E3b/E3c: action sensitivity, dose-response | `e3b_action_sensitivity.py`, `e3c_dose_response.py` | `results/e3/` |
 | E4: identifiability | `e4_identifiability.py` | `results/e3/e4_*.csv` |
 | E5: unseen sector, post-season | `e5_generalization.py` | `results/e5/` |
 | E6: sensor faults, fault augmentation | `e6_faults.py`, `e6b_fault_aug.py [--no-physics]` | `results/e6/` |
 | E7: conformal calibration | `e7_conformal.py <models>` | `results/e7/` |
 | E8: closed-loop control (simulators, reference controllers) | `e8_control.py --validate`, `e8_refs.py` | `results/e8/` |
-| E8: same planner with different forecasters, BPT (C5), risk sweep, noise | `e8b_forecaster_mpc.py [--ctrls ...] [--plants A] [--kappa k] [--noise] [--tag t]`, `e8b_summary.py`, `e8_pareto.py` | `results/e8/` |
-| E8: independently calibrated plant (simulator sensitivity check) | `e8b_forecaster_mpc.py --plant-loso --plants A --ctrls Fixed-interval,Hysteresis,EDML,Physics,Chronos-2,Chronos-BPT,RACER-Irr --tag _plantloso` | `results/e8/e8b_results_plantloso.csv` (Table S10) |
+| C3/C4: same planner with different forecasters, BPT, risk sweep, noise | `e8b_forecaster_mpc.py [--ctrls ...] [--plants A] [--kappa k] [--noise] [--tag t]`, `e8b_summary.py`, `e8_pareto.py` | `results/e8/` |
+| E8: independently calibrated plant (simulator sensitivity check) | `e8b_forecaster_mpc.py --plant-loso --plants A --ctrls Fixed-interval,Hysteresis,EDML,Physics,Chronos-2,Chronos-BPT,RACER-Irr --tag _plantloso` | `results/e8/e8b_results_plantloso*.csv` (Tables 17 and 19); add `--kappa k` for the risk sweep |
+| E8: sensitivity of BPT to physics-model errors | `e8b_forecaster_mpc.py --plants A --ctrls Chronos-BPT --perturb alpha*0.5 --tag _sens_alphax0.5` (also `alpha*2`, `c*0.7`, `c*1.4`, `d*0.5`, `d*2`, `r=0.2`, `r=0.9`, `beta=0.2`, `beta=0.9`) | `results/e8/e8b_results_sens_*.csv` (Table 20) |
+| E13: Ensemble-BPT (BPT on the five-TSFM ensemble) | `e13_ensemble.py` (benchmark and bootstrap), `run_queue9.sh` (closed loop, `--ctrls Ensemble-BPT`) | `results/e2/e13_ensemble_stats.csv`, `results/e2/preds/TSFM-Ensemble.csv.gz`, `results/e8/e8b_results_*ensbpt*.csv` |
 | E10: data efficiency | `e10_data_efficiency.py` | `results/e10_data_efficiency.csv` |
 | E11: external farm | `e11_external.py` | `results/e11/` |
-| E12: RACER-Irr (C6) | `e12_racer.py [full\|nocf]` | `results/e12/`, `results/e2/preds/` |
+| E12: RACER-Irr (C4) and component ablations | `e12_racer.py [full\|nocf\|nomono\|noband\|nocaus\|nosat\|nofa]`, then `e2_eval.py` | `results/e12/racer_dose.csv`, `results/e2/e12_ablation_metrics.csv`, `results/e2/preds/` |
 | Statistics (block bootstrap) | `stats_bootstrap.py` | `results/stats_*.csv` |
-| Figures | `figures.py`, `fig_architecture.py` | `paper/figures/` |
+| Figures | `figures.py`, `fig_architecture.py`, `fig_clear.py`, `fig_review.py` | `paper/figures/` |
 | Job queues used on the 8 GB machine | `run_queue*.sh` | logs in `results/` |
 
 ## Where the proposed methods are implemented
