@@ -1,4 +1,4 @@
-"""Paired moving-block bootstrap CIs (block = sector x calendar day, B = 2000) for MAE differences.
+"""Paired block bootstrap CIs (resampling whole blocks; block = sector x calendar day, B = 2000) for MAE differences.
 E2: every model vs Chronos-2 (and vs PhyChronos-Irr-FA).  E6: PhyChronos-Irr-FA vs each model per fault scenario.
 Writes results/stats_e2_bootstrap.csv, results/stats_e6_bootstrap.csv."""
 import numpy as np
