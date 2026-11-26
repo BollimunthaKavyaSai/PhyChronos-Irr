@@ -49,8 +49,8 @@ After the first download, set `HF_HUB_OFFLINE=1` to run offline. Run every scrip
 | E7: conformal calibration | `e7_conformal.py <models>` | `results/e7/` |
 | E8: closed-loop control (simulators, reference controllers) | `e8_control.py --validate`, `e8_refs.py` | `results/e8/` |
 | C3/C4: same planner with different forecasters, BPT, risk sweep, noise | `e8b_forecaster_mpc.py [--ctrls ...] [--plants A] [--kappa k] [--noise] [--tag t]`, `e8b_summary.py`, `e8_pareto.py` | `results/e8/` |
-| E8: independently calibrated plant (simulator sensitivity check) | `e8b_forecaster_mpc.py --plant-loso --plants A --ctrls Fixed-interval,Hysteresis,EDML,Physics,Chronos-2,Chronos-BPT,RACER-Irr --tag _plantloso` | `results/e8/e8b_results_plantloso*.csv` (Tables 17 and 19); add `--kappa k` for the risk sweep |
-| E8: sensitivity of BPT to physics-model errors | `e8b_forecaster_mpc.py --plants A --ctrls Chronos-BPT --perturb alpha*0.5 --tag _sens_alphax0.5` (also `alpha*2`, `c*0.7`, `c*1.4`, `d*0.5`, `d*2`, `r=0.2`, `r=0.9`, `beta=0.2`, `beta=0.9`) | `results/e8/e8b_results_sens_*.csv` (Table 20) |
+| E8: independently calibrated plant (simulator sensitivity check) | `e8b_forecaster_mpc.py --plant-loso --plants A --ctrls Fixed-interval,Hysteresis,EDML,Physics,Chronos-2,Chronos-BPT,RACER-Irr --tag _plantloso` | `results/e8/e8b_results_plantloso*.csv` (Tables 18 and 20); add `--kappa k` for the risk sweep |
+| E8: sensitivity of BPT to physics-model errors | `e8b_forecaster_mpc.py --plants A --ctrls Chronos-BPT --perturb alpha*0.5 --tag _sens_alphax0.5` (also `alpha*2`, `c*0.7`, `c*1.4`, `d*0.5`, `d*2`, `r=0.2`, `r=0.9`, `beta=0.2`, `beta=0.9`) | `results/e8/e8b_results_sens_*.csv` (Table 21) |
 | E13: Ensemble-BPT (BPT on the five-TSFM ensemble) | `e13_ensemble.py` (benchmark and bootstrap), `run_queue9.sh` (closed loop, `--ctrls Ensemble-BPT`) | `results/e2/e13_ensemble_stats.csv`, `results/e2/preds/TSFM-Ensemble.csv.gz`, `results/e8/e8b_results_*ensbpt*.csv` |
 | E10: data efficiency | `e10_data_efficiency.py` | `results/e10_data_efficiency.csv` |
 | E11: external farm | `e11_external.py` | `results/e11/` |
